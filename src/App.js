@@ -356,7 +356,7 @@ function App() {
             rel="noopener noreferrer"
             className="cta-button reviews-button"
           >
-            Ver Mais Avalia��ões no Google
+            Ver Mais Avaliações no Google
           </a>
         </div>
       </section>
