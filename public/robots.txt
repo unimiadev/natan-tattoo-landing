@@ -1,0 +1,22 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://natantattoo.com.br/sitemap.xml
+
+# Disallow crawling of administrative and system files
+Disallow: /private/
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.txt$
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Allow crawling of important content
+Allow: /assets/
+Allow: /images/
+Allow: /portfolio/
