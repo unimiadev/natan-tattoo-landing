@@ -506,13 +506,16 @@ p {
 
 @media (max-width: 768px) {
   .section-hero {
-    height: auto;
-    min-height: 60vh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
   }
 
   .hero-content {
     flex-direction: column-reverse;
-    padding: 3rem 2rem;
+    padding: 2rem;
+    height: auto;
+    justify-content: center;
   }
 
   .left-side,
@@ -604,7 +607,7 @@ p {
 
 @media (max-width: 480px) {
   .hero-content {
-    padding: 2rem 1rem;
+    padding: 1rem;
   }
 
   .right-side {
@@ -638,5 +641,90 @@ p {
   .content-half.portfolio-text,
   .content-half.portfolio-gallery {
     padding: 1rem;
+  }
+}
+
+/* ==========================================================================
+   Navigation Menu
+   ========================================================================== */
+.nav-menu {
+  position: fixed;
+  top: 1rem;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: background-color 0.3s ease;
+}
+
+.nav-menu.scrolled {
+  background-color: var(--color-primary);
+}
+
+.menu-items {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-items li {
+  color: var(--color-white);
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.menu-items li:hover {
+  color: var(--color-secondary);
+}
+
+.menu-toggle {
+  display: none;
+  color: var(--color-white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+/* Update mobile menu styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1001;
+  }
+
+  .menu-items {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-primary);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+
+  .menu-items.active {
+    transform: translateY(0);
+  }
+
+  .menu-items li {
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+
+  /* Remove the hero section padding */
+  .section-hero {
+    padding-top: 0;
   }
 }

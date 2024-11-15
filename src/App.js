@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import portfolio1 from "./assets/media/images/portfolio-1.jpg";
-import portfolio2 from "./assets/media/images/portfolio-1.jpg";
-import portfolio3 from "./assets/media/images/portfolio-1.jpg";
-import portfolio4 from "./assets/media/images/portfolio-1.jpg";
+import portfolio2 from "./assets/media/images/portfolio-2.jpg";
+import portfolio3 from "./assets/media/images/portfolio-3.jpg";
+import portfolio4 from "./assets/media/images/portfolio-4.jpg";
 import about from "./assets/media/images/about.jpg";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const portfolioImages = [
@@ -35,6 +36,8 @@ function App() {
   ];
 
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const openImage = (imageSrc) => {
     setSelectedImage(imageSrc);
@@ -83,10 +86,52 @@ function App() {
     },
   ];
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    document.body.style.overflow = !isMenuOpen ? "hidden" : "auto";
+  };
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false);
+      document.body.style.overflow = "auto";
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setIsScrolled(offset > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div>
+      {/* Navigation Menu */}
+      <nav className={`nav-menu ${isScrolled ? "scrolled" : ""}`}>
+        <div className="menu-toggle" onClick={toggleMenu}>
+          <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+        </div>
+        <ul className={`menu-items ${isMenuOpen ? "active" : ""}`}>
+          <li onClick={() => scrollToSection("inicio")}>Página Inicial</li>
+          <li onClick={() => scrollToSection("sobre")}>Sobre</li>
+          <li onClick={() => scrollToSection("portfolio")}>Portfólio</li>
+          <li onClick={() => scrollToSection("orcamento")}>Orçamento</li>
+          <li onClick={() => scrollToSection("localizacao")}>Localização</li>
+          <li onClick={() => scrollToSection("depoimentos")}>Depoimentos</li>
+          <li onClick={() => scrollToSection("contato")}>Contato</li>
+        </ul>
+      </nav>
+
       {/* Hero Section */}
-      <section className="section-hero">
+      <section id="inicio" className="section-hero">
         <div className="hero-background" />
         <div className="hero-content">
           <div className="left-side">
@@ -108,7 +153,7 @@ function App() {
       </section>
 
       {/* Section 2 */}
-      <section className="section-content dark">
+      <section id="sobre" className="section-content dark">
         <div className="content-container">
           <div className="content-half about-image-container">
             <img src={about} alt="About" className="section-2-image" />
@@ -144,7 +189,7 @@ function App() {
       </section>
 
       {/* Portfolio Section */}
-      <section className="section-content light">
+      <section id="portfolio" className="section-content light">
         <div className="content-container portfolio">
           <div className="content-half portfolio-text">
             <h2>Portfólio</h2>
@@ -187,7 +232,7 @@ function App() {
       </section>
 
       {/* Budget Section */}
-      <section className="section-content dark">
+      <section id="orcamento" className="section-content dark">
         <div className="budget-container">
           <div className="budget-text">
             <h2>Orçamento</h2>
@@ -242,7 +287,7 @@ function App() {
       )}
 
       {/* Section 4 */}
-      <section className="section-content dark">
+      <section id="localizacao" className="section-content dark">
         <div className="content-container">
           <div className="content-half map-container">
             <LoadScript
@@ -278,7 +323,7 @@ function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="section-content light">
+      <section id="depoimentos" className="section-content light">
         <div className="content-container testimonials">
           <h2 className="testimonials-title">O que dizem nossos clientes</h2>
           <div className="testimonials-container">
@@ -311,13 +356,13 @@ function App() {
             rel="noopener noreferrer"
             className="cta-button reviews-button"
           >
-            Ver Mais Avaliações no Google
+            Ver Mais Avalia��ões no Google
           </a>
         </div>
       </section>
 
       {/* Final Section */}
-      <section className="section-final light">
+      <section id="contato" className="section-final light">
         <div className="final-content">
           <h2>Entre em Contato</h2>
           <p>
