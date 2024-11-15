@@ -653,11 +653,13 @@ p {
   width: 100%;
   z-index: 1000;
   padding: 1rem 0;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-menu.scrolled {
   background-color: var(--color-primary);
+  top: 0;
+  padding: 0.5rem 0;
 }
 
 .menu-items {
