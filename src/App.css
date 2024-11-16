@@ -280,6 +280,7 @@ p {
    ========================================================================== */
 .map-container {
   padding: 2rem;
+  padding-top: 4rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -288,6 +289,32 @@ p {
 .business-hours {
   margin-top: 2rem;
   color: var(--color-secondary);
+}
+
+.location-tabs {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+.tab-button:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 /* ==========================================================================
@@ -602,6 +629,15 @@ p {
 
   .portfolio-image-container {
     width: calc(50% - 0.5rem);
+  }
+
+  .location-tabs {
+    justify-content: center;
+  }
+
+  .tab-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
   }
 }
 

@@ -38,6 +38,36 @@ function App() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeLocation, setActiveLocation] = useState("soledade");
+
+  const locations = {
+    soledade: {
+      title: "Soledade",
+      address: {
+        street: "Rua Bento Gonçalves, 1000",
+        neighborhood: "Bairro Centro",
+        city: "Soledade - RS",
+        cep: "CEP: 99300-000",
+      },
+      coordinates: {
+        lat: -28.82924593487399,
+        lng: -52.50938919384304,
+      },
+    },
+    passoFundo: {
+      title: "Passo Fundo",
+      address: {
+        street: "Rua Morom, 1485B",
+        neighborhood: "Bairro Centro",
+        city: "Passo Fundo - RS",
+        cep: "CEP: 99010-032",
+      },
+      coordinates: {
+        lat: -28.261617644163778,
+        lng: -52.40590545958229,
+      },
+    },
+  };
 
   const openImage = (imageSrc) => {
     setSelectedImage(imageSrc);
@@ -52,11 +82,6 @@ function App() {
   const mapStyles = {
     height: "400px",
     width: "100%",
-  };
-
-  const defaultCenter = {
-    lat: -28.82924593487399,
-    lng: -52.50938919384304,
   };
 
   const testimonials = [
@@ -296,22 +321,40 @@ function App() {
               <GoogleMap
                 mapContainerStyle={mapStyles}
                 zoom={19}
-                center={defaultCenter}
+                center={locations[activeLocation].coordinates}
               >
-                <Marker position={defaultCenter} />
+                <Marker position={locations[activeLocation].coordinates} />
               </GoogleMap>
             </LoadScript>
           </div>
           <div className="content-half">
             <h2>Localização</h2>
+            <div className="location-tabs">
+              <button
+                className={`tab-button ${
+                  activeLocation === "soledade" ? "active" : ""
+                }`}
+                onClick={() => setActiveLocation("soledade")}
+              >
+                Soledade
+              </button>
+              <button
+                className={`tab-button ${
+                  activeLocation === "passoFundo" ? "active" : ""
+                }`}
+                onClick={() => setActiveLocation("passoFundo")}
+              >
+                Passo Fundo
+              </button>
+            </div>
             <p>
-              Rua Bento Gonçalves, 1000
+              {locations[activeLocation].address.street}
               <br />
-              Bairro Centro
+              {locations[activeLocation].address.neighborhood}
               <br />
-              Soledade - RS
+              {locations[activeLocation].address.city}
               <br />
-              CEP: 99300-000
+              {locations[activeLocation].address.cep}
             </p>
             <p className="business-hours">
               Horário de Funcionamento:
