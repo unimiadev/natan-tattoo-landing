@@ -430,7 +430,7 @@ function App() {
         <p>
           &copy; 2024{" "}
           <a
-            href="https://instagram.com/abreuelima.matheus"
+            href="https://unimia.dev"
             target="_blank"
             rel="noopener noreferrer"
           >
